@@ -1,3 +1,5 @@
+package com.example.ids_jobtask;
+
 public class page1GalleryInformation {
 
     String  Name;
