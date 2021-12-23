@@ -5,6 +5,9 @@ public class page1GalleryInformation {
     String  Name;
     String CroppedImage320x308;
 
+    public page1GalleryInformation() {
+    }
+
     public page1GalleryInformation(String name, String croppedImage320x308) {
         Name = name;
         CroppedImage320x308 = croppedImage320x308;
