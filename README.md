@@ -15,3 +15,6 @@ Guidelines:
 click the button in the main activity to go to first gallery activity <br/>
 click any position in the recycler view to go to a personalized second activity <br/>
 
+![alt text](https://github.com/hebarachid/IDS_jobTask/blob/master/first.jpeg)
+![alt text](https://github.com/hebarachid/IDS_jobTask/blob/master/second.jpeg)
+![alt text](https://github.com/hebarachid/IDS_jobTask/blob/master/third.jpeg)
