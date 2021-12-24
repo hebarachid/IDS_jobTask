@@ -34,9 +34,8 @@ public class firstAdapter extends RecyclerView.Adapter<firstAdapter.MyViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        if(position%2==0){
       holder.Name.setText(mData.get(position).getName());
-        Glide.with(mContext).load(mData.get(position).getCroppedImage320x308()).into(holder.image);}
+        Glide.with(mContext).load(mData.get(position).getCroppedImage320x308()).into(holder.image);
 
     }
 

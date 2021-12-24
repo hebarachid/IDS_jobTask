@@ -20,4 +20,9 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), firstPageActivity.class);
         startActivity(intent);
     }
+
+    public void page2(View view) {
+        Intent intent = new Intent(getApplicationContext(), activity_second_page.class);
+        startActivity(intent);
+    }
 }
