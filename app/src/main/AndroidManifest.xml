@@ -14,9 +14,11 @@
         android:usesCleartextTraffic="true">
         <activity
             android:name=".activity_second_page"
+            android:parentActivityName=".firstPageActivity"
             android:exported="true" />
         <activity
             android:name=".firstPageActivity"
+            android:parentActivityName=".MainActivity"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
