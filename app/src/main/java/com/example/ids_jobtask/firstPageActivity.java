@@ -1,5 +1,6 @@
 package com.example.ids_jobtask;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -41,6 +43,7 @@ RecyclerView recyclerView;
      Log.i("hey","I am here");
         GetData getData=new GetData();
         getData.execute();
+       recyclerView.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener());
     }
     public class GetData extends AsyncTask<String,String,String>{
 
@@ -115,4 +118,5 @@ RecyclerView recyclerView;
 
         recyclerView.setAdapter(firstAdapter);
     }
+
 }
