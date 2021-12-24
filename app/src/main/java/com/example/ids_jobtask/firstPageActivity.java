@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,11 +29,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class firstPageActivity extends AppCompatActivity {
+public class firstPageActivity extends AppCompatActivity implements firstAdapter.onNameListener  {
 private static String apiURL="http://www.idsdemo.me/champsservice/GeneralServices.asmx/GetGallery?categoryId=1";
 
 List<page1GalleryInformation> galleryList;
 RecyclerView recyclerView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +42,20 @@ RecyclerView recyclerView;
         setContentView(R.layout.activity_first_page);
         galleryList=new ArrayList<>();
         recyclerView=findViewById(R.id.recyclerView);
-     Log.i("hey","I am here");
+        Log.i("hey","I am here");
         GetData getData=new GetData();
         getData.execute();
        recyclerView.addOnItemTouchListener(new RecyclerView.SimpleOnItemTouchListener());
     }
+
+    @Override
+    public void onNameClick(int position) {
+       page1GalleryInformation A= galleryList.get(position);
+        Intent intent=new Intent(this,activity_second_page.class);
+        intent.putExtra("idOftheGallery", A.getID());
+        startActivity(intent);
+    }
+
     public class GetData extends AsyncTask<String,String,String>{
 
         @Override
@@ -100,9 +111,10 @@ RecyclerView recyclerView;
                     page1GalleryInformation model=new page1GalleryInformation();
                     model.setName(jsonObject1.getString("Name"));
                     model.setCroppedImage320x308(jsonObject2.getString("CroppedImage320x308"));
-
+                    model.setID(jsonObject1.getString("Id"));
                     galleryList.add(model);
                     Log.i("h",galleryList.toString());
+                    Log.i("id",jsonObject1.getString("Id"));
                 }
 
             }catch (JSONException e){
@@ -113,7 +125,7 @@ RecyclerView recyclerView;
     }
 
     private void putDataIntoRecyclerView(List<page1GalleryInformation> galleryList){
-        firstAdapter firstAdapter=new firstAdapter(this,galleryList);
+        firstAdapter firstAdapter=new firstAdapter(this,galleryList,this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         recyclerView.setAdapter(firstAdapter);

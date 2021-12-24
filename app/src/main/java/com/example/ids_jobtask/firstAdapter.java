@@ -17,10 +17,11 @@ import java.util.List;
 public class firstAdapter extends RecyclerView.Adapter<firstAdapter.MyViewHolder>{
     private Context mContext;
     private List<page1GalleryInformation> mData;
-
-    public firstAdapter(Context mContext, List<page1GalleryInformation> mData) {
+    private onNameListener monNameListener;
+    public firstAdapter(Context mContext, List<page1GalleryInformation> mData,onNameListener monNameListener) {
         this.mContext = mContext;
         this.mData = mData;
+        this.monNameListener=monNameListener;
     }
 
     @NonNull
@@ -29,7 +30,7 @@ public class firstAdapter extends RecyclerView.Adapter<firstAdapter.MyViewHolder
         View v;
         LayoutInflater inflater=LayoutInflater.from(mContext);
         v=inflater.inflate(R.layout.gallery_first_page_items,parent,false);
-        return new MyViewHolder(v);
+        return new MyViewHolder(v,monNameListener);
     }
 
     @Override
@@ -44,15 +45,24 @@ public class firstAdapter extends RecyclerView.Adapter<firstAdapter.MyViewHolder
         return mData.size();
     }
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder {
+    public static class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
          TextView Name;
          ImageView image;
-
-        public MyViewHolder(@NonNull View itemView) {
+         onNameListener onNameListener;
+        public MyViewHolder(@NonNull View itemView,onNameListener onNameListener) {
             super(itemView);
             Name = itemView.findViewById(R.id.Name);
             this.image = itemView.findViewById(R.id.CroppedImage320x308);
+            this.onNameListener=onNameListener;
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            onNameListener.onNameClick(getAdapterPosition());
         }
     }
-
+public interface  onNameListener{
+        void onNameClick(int position);
+}
 }

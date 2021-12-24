@@ -22,14 +22,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class activity_second_page extends AppCompatActivity {
-    private static String apiURL="http://www.idsdemo.me/champsservice/GeneralServices.asmx/GetGalleryPictures?albumId=48&start=0&end=10";
 
+
+    private static String apiURL;
+    String id;
     List<page2GalleryInformation> gallery2List;
     RecyclerView recyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second_page);
+
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                id= null;
+            } else {
+                id=extras.getString("idOftheGallery");
+            }
+        } else {
+            id= (String) savedInstanceState.getSerializable("idOftheGallery");
+        }
+        apiURL="http://www.idsdemo.me/champsservice/GeneralServices.asmx/GetGalleryPictures?albumId="+id+"&start=0&end=10";
+        Log.i("api",apiURL);
         gallery2List=new ArrayList<>();
         recyclerView=findViewById(R.id.recyclerView2);
         Log.i("hey","I am here");
